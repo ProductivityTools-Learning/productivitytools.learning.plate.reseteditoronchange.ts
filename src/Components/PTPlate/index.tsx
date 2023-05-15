@@ -3,7 +3,7 @@ import { Plate, useResetPlateEditor } from "@udecode/plate";
 
 import { MyParagraphElement, MyValue } from "./typescript/plateTypes";
 
-const ResetEditorOnValueChange = ({ value }: { value: MyValue }) => {
+const ResetEditorOnValueChange = ({ value }: { value: MyParagraphElement[] }) => {
   const resetPlateEditor = useResetPlateEditor();
   const isFirst = useRef(true);
   console.log("useffect2");
@@ -32,11 +32,11 @@ const initialValue = (content: string) => [
 ];
 
 type Props<PTPlateProps> = {
-  propValue: MyValue;
+  propValue: MyParagraphElement[];
 };
 
 function PTPlate2<PTPlateProps>({ propValue }: Props<PTPlateProps>) {
-  const [debugValue, setDebugValue] = useState<MyValue>(propValue);
+  const [debugValue, setDebugValue] = useState<MyParagraphElement[]>(propValue);
 
   useEffect(() => {
     console.log("XXXXXXXXX")
@@ -46,7 +46,7 @@ function PTPlate2<PTPlateProps>({ propValue }: Props<PTPlateProps>) {
   return (
     <div className="plate">
       <br></br>Plate3 (component):<br></br>
-      <Plate<MyValue> editableProps={{ placeholder: "Type…" }} value={debugValue}>
+      <Plate<MyParagraphElement[]> editableProps={{ placeholder: "Type…" }} value={debugValue}>
         <ResetEditorOnValueChange value={debugValue} />
       </Plate>
     </div>
