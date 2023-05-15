@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from "react";
 import { Plate, useResetPlateEditor } from "@udecode/plate";
 
 import { MyParagraphElement, MyValue } from "./typescript/plateTypes";
-import PTPlate2 from "./Components/PTPlate";
 
 const ResetEditorOnValueChange = ({ value }: { value: MyValue }) => {
   const resetPlateEditor = useResetPlateEditor();
@@ -32,26 +31,26 @@ const initialValue = (content: string) => [
   } as MyParagraphElement,
 ];
 
-function App() {
-  const [debugValue, setDebugValue] = useState<MyValue>(initialValue("fdsa"));
+type Props<PTPlateProps> = {
+  propValue: MyValue;
+};
+
+function PTPlate2<PTPlateProps>({ propValue }: Props<PTPlateProps>) {
+  const [debugValue, setDebugValue] = useState<MyValue>(propValue);
+
+  useEffect(() => {
+    console.log("XXXXXXXXX")
+    setDebugValue(propValue);
+  }, [propValue]);
 
   return (
-    <div className="App">
-      hello
-      <div>
-        Input which changes Plate2
-        <input type="text" onChange={() => setDebugValue(initialValue("ddd"))}></input><br/><br/>
-        Plate1 changes Plate2 on chnge
-        <Plate<MyValue>  initialValue={debugValue} onChange={setDebugValue} /><br/>
-        Plae2: which is changed but also allows to write in it
-        <Plate<MyValue> editableProps={{placeholder: 'Type…'}} value={debugValue}>
-          <ResetEditorOnValueChange value={debugValue} />
-        </Plate>
-
-        <PTPlate2 propValue={debugValue}></PTPlate2>
-      </div>
+    <div className="plate">
+      <br></br>Plate3 (component):<br></br>
+      <Plate<MyValue> editableProps={{ placeholder: "Type…" }} value={debugValue}>
+        <ResetEditorOnValueChange value={debugValue} />
+      </Plate>
     </div>
   );
 }
 
-export default App;
+export default PTPlate2;
