@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Plate, useResetPlateEditor } from "@udecode/plate";
-
 import { MyParagraphElement, MyValue } from "./typescript/plateTypes";
 
 const ResetEditorOnValueChange = ({ value }: { value: MyParagraphElement[] }) => {
@@ -39,7 +38,7 @@ function PTPlate2<PTPlateProps>({ propValue }: Props<PTPlateProps>) {
   const [debugValue, setDebugValue] = useState<MyParagraphElement[]>(propValue);
 
   useEffect(() => {
-    console.log("XXXXXXXXX")
+    console.log("XXXXXXXXX");
     setDebugValue(propValue);
   }, [propValue]);
 
